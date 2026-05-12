@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio · [Il Tuo Nome]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080c10;
+      --surface:  #0e1318;
+      --border:   #1e2830;
+      --gold:     #c8a45a;
+      --gold-dim: #7a5f2a;
+      --text:     #e8e2d8;
+      --muted:    #6b7a85;
+      --accent:   #3a8fa3;
+      --tag-bg:   #131c24;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .03;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ─── GRID LINES ─── */
+    .grid-lines {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,164,90,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,164,90,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── HERO ─── */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2rem, 6vw, 6rem);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 22vw, 22rem);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,164,90,.07);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fadeUp .8s ease forwards .2s;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 9vw, 8.5rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.03em;
+      opacity: 0;
+      animation: fadeUp .9s ease forwards .4s;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-top: 1.8rem;
+      opacity: 0;
+      animation: fadeUp .9s ease forwards .65s;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp .9s ease forwards .85s;
+    }
+
+    .hero-meta a {
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color .25s, border-color .25s;
+    }
+
+    .hero-meta a:hover { color: var(--gold); border-color: var(--gold); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      right: clamp(2rem, 6vw, 6rem);
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      opacity: 0;
+      animation: fadeUp .9s ease forwards 1.2s;
+    }
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim));
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 5rem) 10rem;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── ABOUT STRIP ─── */
+    .about-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 8rem;
+    }
+    .about-cell {
+      background: var(--surface);
+      padding: 2.2rem 2.4rem;
+    }
+    .about-cell-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .7rem;
+    }
+    .about-cell-value {
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .about-cell-value.large {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--gold);
+    }
+
+    /* ─── ACCORDION SUBJECTS ─── */
+    .subjects { display: flex; flex-direction: column; gap: 1px; }
+
+    .subject {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .subject:hover { border-color: var(--gold-dim); }
+    .subject.open   { border-color: var(--gold); }
+
+    .subject-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.6rem 2rem;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .subject-num {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      color: var(--gold-dim);
+      min-width: 2ch;
+    }
+
+    .subject-title-wrap { display: flex; flex-direction: column; gap: .25rem; }
+
+    .subject-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text);
+      transition: color .25s;
+    }
+    .subject.open .subject-title,
+    .subject-header:hover .subject-title { color: var(--gold); }
+
+    .subject-prof {
+      font-size: .78rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .subject-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: .25rem .6rem;
+      border-radius: 2px;
+    }
+
+    .subject-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: transform .4s cubic-bezier(.16,1,.3,1), background .25s, border-color .25s;
+      flex-shrink: 0;
+    }
+    .subject.open .subject-arrow {
+      transform: rotate(180deg);
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .subject-arrow svg { width: 12px; height: 12px; }
+
+    /* ─── ACCORDION BODY ─── */
+    .subject-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1);
+    }
+    .subject.open .subject-body { grid-template-rows: 1fr; }
+    .subject-body-inner { overflow: hidden; }
+
+    .subject-content {
+      padding: 0 2rem 2.2rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    .subject-description { font-size: .95rem; color: var(--muted); line-height: 1.8; }
+    .subject-description h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: .8rem;
+      font-weight: 700;
+    }
+
+    /* ─── PROJECT CARDS ─── */
+    .projects-col { display: flex; flex-direction: column; gap: .8rem; }
+
+    .project-card {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      text-decoration: none;
+      transition: border-color .25s, background .25s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--gold);
+      background: rgba(200,164,90,.04);
+    }
+
+    .project-card-left { flex: 1; }
+    .project-card-name {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .3rem;
+    }
+    .project-card-type {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    .project-card-link {
+      font-size: .75rem;
+      color: var(--muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      transition: color .2s;
+    }
+    .project-card:hover .project-card-link { color: var(--gold); }
+    .project-card-link svg { width: 10px; height: 10px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 3rem clamp(1.5rem, 6vw, 6rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .15em;
+      color: var(--muted);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      .about-strip { grid-template-columns: 1fr; }
+      .subject-content { grid-template-columns: 1fr; }
+      .subject-tags { display: none; }
+      .hero-meta { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-lines"></div>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║           HERO               ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<header>
+  <div class="hero-bg-text">MASTER</div>
+
+  <p class="hero-eyebrow">Portfolio Accademico &nbsp;·&nbsp; Master [Nome Master]</p>
+
+  <h1 class="hero-name">
+    [Il Tuo<br><em>Nome]</em>
+  </h1>
+
+  <p class="hero-sub">
+    Raccolta di progetti, analisi e ricerche sviluppati durante il percorso di Master in [Università / Istituto].
+  </p>
+
+  <nav class="hero-meta">
+    <a href="https://github.com/tuousername" target="_blank">↗ GitHub</a>
+    <a href="https://linkedin.com/in/tuoprofilo" target="_blank">↗ LinkedIn</a>
+    <a href="mailto:tua@email.com">↗ Contatti</a>
+    <!-- Aggiungi altri link -->
+  </nav>
+
+  <span class="scroll-hint">Scroll</span>
+</header>
+
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║           MAIN               ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<main>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip reveal" style="margin-bottom:8rem;">
+    <div class="about-cell">
+      <div class="about-cell-label">Programma</div>
+      <div class="about-cell-value large">[Nome Master]</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Istituto</div>
+      <div class="about-cell-value large">[Università]</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Anno</div>
+      <div class="about-cell-value">2024 – 2025</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Focus</div>
+      <div class="about-cell-value">[Es. Data Science · Business Strategy · Finance]</div>
+    </div>
+  </div>
+
+  <!-- SECTION LABEL -->
+  <div class="section-label reveal">Materie &amp; Progetti</div>
+
+  <!-- ──────────────────────────────────────────────
+       ACCORDION — duplica questo blocco per ogni materia
+       ────────────────────────────────────────────── -->
+  <div class="subjects">
+
+    <!-- ★ MATERIA 1 -->
+    <div class="subject reveal" onclick="toggleSubject(this)">
+      <div class="subject-header">
+        <span class="subject-num">01</span>
+        <div class="subject-title-wrap">
+          <span class="subject-title">[Nome Materia — es. Machine Learning]</span>
+          <span class="subject-prof">Prof. [Nome Cognome]</span>
+        </div>
+        <div class="subject-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Analisi</span>
+        </div>
+        <div class="subject-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="2,4 6,8 10,4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="subject-body-inner">
+          <div class="subject-content">
+            <div class="subject-description">
+              <h4>Panoramica del corso</h4>
+              <p>
+                [Descrizione breve del corso, degli obiettivi didattici e delle metodologie trattate. Cosa hai imparato? Quali tecniche/strumenti hai usato? Questo testo è completamente personalizzabile.]
+              </p>
+            </div>
+            <div class="projects-col">
+              <!-- Project card — duplica per ogni progetto -->
+              <a class="project-card" href="https://github.com/tuousername/repo-progetto" target="_blank">
+                <div class="project-card-left">
+                  <div class="project-card-name">[Titolo Progetto 1]</div>
+                  <div class="project-card-type">Analisi · Report finale</div>
+                </div>
+                <span class="project-card-link">
+                  GitHub
+                  <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M2 8 L8 2 M3 2 h5 v5"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="project-card" href="#" target="_blank">
+                <div class="project-card-left">
+                  <div class="project-card-name">[Titolo Progetto 2]</div>
+                  <div class="project-card-type">Modello · Presentazione</div>
+                </div>
+                <span class="project-card-link">
+                  GitHub
+                  <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M2 8 L8 2 M3 2 h5 v5"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /subject -->
+
+    <!-- ★ MATERIA 2 -->
+    <div class="subject reveal" onclick="toggleSubject(this)">
+      <div class="subject-header">
+        <span class="subject-num">02</span>
+        <div class="subject-title-wrap">
+          <span class="subject-title">[Nome Materia — es. Corporate Finance]</span>
+          <span class="subject-prof">Prof. [Nome Cognome]</span>
+        </div>
+        <div class="subject-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Valutazione</span>
+          <span class="tag">M&amp;A</span>
+        </div>
+        <div class="subject-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="2,4 6,8 10,4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="subject-body-inner">
+          <div class="subject-content">
+            <div class="subject-description">
+              <h4>Panoramica del corso</h4>
+              <p>[Descrizione del corso. Metodi, strumenti, risultati ottenuti. Personalizza liberamente.]</p>
+            </div>
+            <div class="projects-col">
+              <a class="project-card" href="#" target="_blank">
+                <div class="project-card-left">
+                  <div class="project-card-name">[Titolo Progetto]</div>
+                  <div class="project-card-type">Case Study · DCF Analysis</div>
+                </div>
+                <span class="project-card-link">
+                  GitHub
+                  <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M2 8 L8 2 M3 2 h5 v5"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /subject -->
+
+    <!-- ★ MATERIA 3 -->
+    <div class="subject reveal" onclick="toggleSubject(this)">
+      <div class="subject-header">
+        <span class="subject-num">03</span>
+        <div class="subject-title-wrap">
+          <span class="subject-title">[Nome Materia — es. Strategic Management]</span>
+          <span class="subject-prof">Prof. [Nome Cognome]</span>
+        </div>
+        <div class="subject-tags">
+          <span class="tag">Strategy</span>
+          <span class="tag">Business Plan</span>
+        </div>
+        <div class="subject-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="2,4 6,8 10,4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="subject-body-inner">
+          <div class="subject-content">
+            <div class="subject-description">
+              <h4>Panoramica del corso</h4>
+              <p>[Descrizione del corso.]</p>
+            </div>
+            <div class="projects-col">
+              <a class="project-card" href="#" target="_blank">
+                <div class="project-card-left">
+                  <div class="project-card-name">[Titolo Progetto]</div>
+                  <div class="project-card-type">Report · Presentazione</div>
+                </div>
+                <span class="project-card-link">
+                  GitHub
+                  <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M2 8 L8 2 M3 2 h5 v5"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /subject -->
+
+    <!-- ↓↓↓ COPIA E INCOLLA QUESTO BLOCCO PER OGNI MATERIA AGGIUNTIVA ↓↓↓ -->
+    <!-- Cambia il numero (04, 05...), il titolo, il professore, i tag e le project card -->
+
+  </div><!-- /subjects -->
+
+</main><!-- /main -->
+
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║          FOOTER              ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<footer>
+  <span class="footer-name">[Il Tuo Nome]</span>
+  <span class="footer-copy">Master · [Anno] &nbsp;·&nbsp; Tutti i diritti riservati</span>
+</footer>
+
+
+<script>
+  /* ── Accordion ── */
+  function toggleSubject(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.subject.open').forEach(s => s.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
