@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio · Laura Gavi </title>
+  <title>Portfolio · [Il Tuo Nome]</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-  --bg:       #0d0814; /* Sfondo scurissimo con una leggera punta di viola profondo */
-  --surface:  #160e22; /* Sfondo delle card, stacca delicatamente dal fondo */
-  --border:   #2d1b3d; /* Bordi eleganti sul viola scuro */
-  --gold:     #f72585; /* Il tuo colore "Wow": Fuxia Neon / Cyber Pink */
-  --gold-dim: #7b1243; /* Versione più scura e spenta del fuxia per le tendine chiuse */
-  --text:     #fdf4f9; /* Bianco rosato luminosissimo per i testi principali */
-  --muted:    #9d88ab; /* Grigio-lilla per le descrizioni e i testi secondari */
-  --accent:   #7209b7; /* Viola profondo acceso (colore di supporto) */
-  --tag-bg:   #1f112c; /* Sfondo scuro delle etichette (es. Python, SQL) */
-}
+      --bg:       #0b0612;
+      --surface:  #150c1f;
+      --border:   #2a1b3d;
+      --gold:     #9d4edd;
+      --gold-dim: #5a189a;
+      --text:     #f4eef9;
+      --muted:    #9b8ba9;
+      --accent:   #7b2cbf;
+      --tag-bg:   #1c102a;
+    }
 
     html { scroll-behavior: smooth; }
 
@@ -46,8 +46,8 @@
     .grid-lines {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(200,164,90,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,164,90,.04) 1px, transparent 1px);
+        linear-gradient(rgba(157, 78, 221, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, .06) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
       z-index: 0;
@@ -74,7 +74,7 @@
       font-size: clamp(8rem, 22vw, 22rem);
       font-weight: 900;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(200,164,90,.07);
+      -webkit-text-stroke: 1px rgba(157, 78, 221, .08);
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: -0.04em;
@@ -193,7 +193,7 @@
     /* ─── ABOUT STRIP ─── */
     .about-strip {
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -353,7 +353,7 @@
     }
     .project-card:hover {
       border-color: var(--gold);
-      background: rgba(200,164,90,.04);
+      background: rgba(157, 78, 221, .06);
     }
 
     .project-card-left { flex: 1; }
@@ -437,83 +437,64 @@
 
 <div class="grid-lines"></div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║           HERO               ║ -->
-<!-- ╚══════════════════════════════╝ -->
 <header>
   <div class="hero-bg-text">MASTER</div>
 
-  <p class="hero-eyebrow">Portfolio Accademico &nbsp;·&nbsp; Master AI and Innovation Management </p>
+  <p class="hero-eyebrow">Portfolio Accademico &nbsp;·&nbsp; Master [Nome Master]</p>
 
   <h1 class="hero-name">
-    Gavi<br><em>Laura </em>
+    [Il Tuo<br><em>Nome]</em>
   </h1>
 
   <p class="hero-sub">
-    Raccolta di alcuni progetti e analisi sviluppati durante il mio percorso alla Bologna Business School.
+    Raccolta di progetti, analisi e ricerche sviluppati durante il percorso di Master in [Università / Istituto].
   </p>
 
   <nav class="hero-meta">
-    <a href="https://github.com/lauracode9" target="_blank">↗ GitHub</a>
-    <a href="https://linkedin.com/in/laura-gavi-a62339304/" target="_blank">↗ LinkedIn</a>
-    <a href="mailto:laura.gavi@studio.unibo.it">↗ Contatti</a>
-    <!-- Aggiungi altri link -->
-  </nav>
+    <a href="https://github.com/tuousername" target="_blank">↗ GitHub</a>
+    <a href="https://linkedin.com/in/tuoprofilo" target="_blank">↗ LinkedIn</a>
+    <a href="mailto:tua@email.com">↗ Contatti</a>
+    </nav>
 
   <span class="scroll-hint">Scroll</span>
 </header>
 
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║           MAIN               ║ -->
-<!-- ╚══════════════════════════════╝ -->
 <main>
 
-  <!-- ABOUT STRIP -->
   <div class="about-strip reveal" style="margin-bottom:8rem;">
-  
-  <div class="about-cell">
-    <div class="about-cell-label">Programma</div>
-    <div class="about-cell-value large">AI and Innovation Management</div>
-  </div>
-
-  <div class="about-cell">
-    <div class="about-cell-label">Istituto</div>
-    <div class="about-cell-value large">Bologna Business School</div>
-  </div>
-
-  <div class="about-cell">
-    <div class="about-cell-label">Focus</div>
-    <div class="about-cell-value">
-      AI · Data Analysis · Digital Innovation · Business Strategy
+    <div class="about-cell">
+      <div class="about-cell-label">Programma</div>
+      <div class="about-cell-value large">[Nome Master]</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Istituto</div>
+      <div class="about-cell-value large">[Università]</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Anno</div>
+      <div class="about-cell-value">2024 – 2025</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Focus</div>
+      <div class="about-cell-value">[Es. Data Science · Business Strategy · Finance]</div>
     </div>
   </div>
 
-  <div class="about-cell">
-    <div class="about-cell-label">Anno</div>
-    <div class="about-cell-value">2025 – 2026</div>
-  </div>
-</div>
+  <div class="section-label reveal">Progetti</div>
 
-  <!-- SECTION LABEL -->
-  <div class="section-label reveal">Materie &amp; Progetti</div>
-
-  <!-- ──────────────────────────────────────────────
-       ACCORDION — duplica questo blocco per ogni materia
-       ────────────────────────────────────────────── -->
   <div class="subjects">
 
-    <!-- ★ MATERIA 1 -->
     <div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">01</span>
         <div class="subject-title-wrap">
-          <span class="subject-title"> Machine Learning </span>
-          <span class="subject-prof"> Prof. Claudio Sartori </span>
+          <span class="subject-title">[Nome Materia — es. Machine Learning]</span>
+          <span class="subject-prof">Prof. [Nome Cognome]</span>
         </div>
         <div class="subject-tags">
           <span class="tag">Python</span>
-          <span class="tag">ML</span>
+          <span class="tag">Scikit-learn</span>
           <span class="tag">Analisi</span>
         </div>
         <div class="subject-arrow">
@@ -526,25 +507,26 @@
         <div class="subject-body-inner">
           <div class="subject-content">
             <div class="subject-description">
-              <h4>Panoramica del progetto</h4>
+              <h4>Panoramica del corso</h4>
               <p>
                 [Descrizione breve del corso, degli obiettivi didattici e delle metodologie trattate. Cosa hai imparato? Quali tecniche/strumenti hai usato? Questo testo è completamente personalizzabile.]
               </p>
             </div>
             <div class="projects-col">
-              <!-- Project card — duplica per ogni progetto -->
-              <a class="project-card" href="https://github.com/tuousername/repo-progetto" target="_blank">
+              
+              <a class="project-card" href="INSERISCI_QUI_IL_LINK_ALLA_TUA_DASHBOARD" target="_blank">
                 <div class="project-card-left">
                   <div class="project-card-name">[Titolo Progetto 1]</div>
-                  <div class="project-card-type">Dashboard</div>
+                  <div class="project-card-type">Analisi · Dashboard Interattiva</div>
                 </div>
                 <span class="project-card-link">
-                  GitHub
+                  Dashboard
                   <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M2 8 L8 2 M3 2 h5 v5"/>
                   </svg>
                 </span>
               </a>
+
               <a class="project-card" href="#" target="_blank">
                 <div class="project-card-left">
                   <div class="project-card-name">[Titolo Progetto 2]</div>
@@ -557,14 +539,12 @@
                   </svg>
                 </span>
               </a>
+
             </div>
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ★ MATERIA 2 -->
-    <div class="subject reveal" onclick="toggleSubject(this)">
+    </div><div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">02</span>
         <div class="subject-title-wrap">
@@ -586,7 +566,7 @@
         <div class="subject-body-inner">
           <div class="subject-content">
             <div class="subject-description">
-              <h4>Panoramica del progetto</h4>
+              <h4>Panoramica del corso</h4>
               <p>[Descrizione del corso. Metodi, strumenti, risultati ottenuti. Personalizza liberamente.]</p>
             </div>
             <div class="projects-col">
@@ -606,10 +586,7 @@
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ★ MATERIA 3 -->
-    <div class="subject reveal" onclick="toggleSubject(this)">
+    </div><div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">03</span>
         <div class="subject-title-wrap">
@@ -630,7 +607,7 @@
         <div class="subject-body-inner">
           <div class="subject-content">
             <div class="subject-description">
-              <h4>Panoramica del progetto</h4>
+              <h4>Panoramica del corso</h4>
               <p>[Descrizione del corso.]</p>
             </div>
             <div class="projects-col">
@@ -650,22 +627,9 @@
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ↓↓↓ COPIA E INCOLLA QUESTO BLOCCO PER OGNI MATERIA AGGIUNTIVA ↓↓↓ -->
-    <!-- Cambia il numero (04, 05...), il titolo, il professore, i tag e le project card -->
-
-  </div><!-- /subjects -->
-
-</main><!-- /main -->
-
-
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║          FOOTER              ║ -->
-<!-- ╚══════════════════════════════╝ -->
-<footer>
-  <span class="footer-name">Laura Gavi</span>
-  <span class="footer-copy"> AI and Innovation Management · [2026] &nbsp;·&nbsp; Portfolio </span>
+    </div></div></main><footer>
+  <span class="footer-name">[Il Tuo Nome]</span>
+  <span class="footer-copy">Master · [Anno] &nbsp;·&nbsp; Tutti i diritti riservati</span>
 </footer>
 
 
