@@ -10,16 +10,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-  --bg:       #0d0814; /* Sfondo scurissimo con una leggera punta di viola profondo */
-  --surface:  #160e22; /* Sfondo delle card, stacca delicatamente dal fondo */
-  --border:   #2d1b3d; /* Bordi eleganti sul viola scuro */
-  --gold:     #f72585; /* Il tuo colore "Wow": Fuxia Neon / Cyber Pink */
-  --gold-dim: #7b1243; /* Versione più scura e spenta del fuxia per le tendine chiuse */
-  --text:     #fdf4f9; /* Bianco rosato luminosissimo per i testi principali */
-  --muted:    #9d88ab; /* Grigio-lilla per le descrizioni e i testi secondari */
-  --accent:   #7209b7; /* Viola profondo acceso (colore di supporto) */
-  --tag-bg:   #1f112c; /* Sfondo scuro delle etichette (es. Python, SQL) */
-}
+      --bg:       #0d0814; /* Sfondo scurissimo con una leggera punta di viola profondo */
+      --surface:  #160e22; /* Sfondo delle card, stacca delicatamente dal fondo */
+      --border:   #2d1b3d; /* Bordi eleganti sul viola scuro */
+      --gold:     #f72585; /* Il tuo colore "Wow": Fuxia Neon / Cyber Pink */
+      --gold-dim: #7b1243; /* Versione più scura e spenta del fuxia per le tendine chiuse */
+      --text:     #fdf4f9; /* Bianco rosato luminosissimo per i testi principali */
+      --muted:    #9d88ab; /* Grigio-lilla per le descrizioni e i testi secondari */
+      --accent:   #7209b7; /* Viola profondo acceso (colore di supporto) */
+      --tag-bg:   #1f112c; /* Sfondo scuro delle etichette (es. Python, SQL) */
+    }
 
     html { scroll-behavior: smooth; }
 
@@ -46,8 +46,8 @@
     .grid-lines {
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(200,164,90,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,164,90,.04) 1px, transparent 1px);
+        linear-gradient(rgba(247, 37, 133, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 37, 133, .04) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
       z-index: 0;
@@ -74,7 +74,7 @@
       font-size: clamp(8rem, 22vw, 22rem);
       font-weight: 900;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(200,164,90,.07);
+      -webkit-text-stroke: 1px rgba(247, 37, 133, .07);
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: -0.04em;
@@ -353,7 +353,7 @@
     }
     .project-card:hover {
       border-color: var(--gold);
-      background: rgba(200,164,90,.04);
+      background: rgba(247, 37, 133, .04);
     }
 
     .project-card-left { flex: 1; }
@@ -437,9 +437,6 @@
 
 <div class="grid-lines"></div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║           HERO               ║ -->
-<!-- ╚══════════════════════════════╝ -->
 <header>
   <div class="hero-bg-text">MASTER</div>
 
@@ -457,19 +454,14 @@
     <a href="https://github.com/lauracode9" target="_blank">↗ GitHub</a>
     <a href="https://linkedin.com/in/laura-gavi-a62339304/" target="_blank">↗ LinkedIn</a>
     <a href="mailto:laura.gavi@studio.unibo.it">↗ Contatti</a>
-    <!-- Aggiungi altri link -->
-  </nav>
+    </nav>
 
   <span class="scroll-hint">Scroll</span>
 </header>
 
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║           MAIN               ║ -->
-<!-- ╚══════════════════════════════╝ -->
 <main>
 
-  <!-- ABOUT STRIP -->
   <div class="about-strip reveal" style="margin-bottom:8rem;">
   
   <div class="about-cell">
@@ -495,15 +487,10 @@
   </div>
 </div>
 
-  <!-- SECTION LABEL -->
-  <div class="section-label reveal">Materie &amp; Progetti</div>
+  <div class="section-label reveal">Progetti</div>
 
-  <!-- ──────────────────────────────────────────────
-       ACCORDION — duplica questo blocco per ogni materia
-       ────────────────────────────────────────────── -->
   <div class="subjects">
 
-    <!-- ★ MATERIA 1 -->
     <div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">01</span>
@@ -532,14 +519,13 @@
               </p>
             </div>
             <div class="projects-col">
-              <!-- Project card — duplica per ogni progetto -->
-              <a class="project-card" href="https://github.com/tuousername/repo-progetto" target="_blank">
+              <a class="project-card" href="INSERISCI_QUI_IL_LINK_ALLA_TUA_DASHBOARD" target="_blank">
                 <div class="project-card-left">
                   <div class="project-card-name">[Titolo Progetto 1]</div>
                   <div class="project-card-type">Dashboard</div>
                 </div>
                 <span class="project-card-link">
-                  GitHub
+                  Dashboard
                   <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M2 8 L8 2 M3 2 h5 v5"/>
                   </svg>
@@ -561,10 +547,7 @@
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ★ MATERIA 2 -->
-    <div class="subject reveal" onclick="toggleSubject(this)">
+    </div><div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">02</span>
         <div class="subject-title-wrap">
@@ -606,10 +589,7 @@
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ★ MATERIA 3 -->
-    <div class="subject reveal" onclick="toggleSubject(this)">
+    </div><div class="subject reveal" onclick="toggleSubject(this)">
       <div class="subject-header">
         <span class="subject-num">03</span>
         <div class="subject-title-wrap">
@@ -650,20 +630,7 @@
           </div>
         </div>
       </div>
-    </div><!-- /subject -->
-
-    <!-- ↓↓↓ COPIA E INCOLLA QUESTO BLOCCO PER OGNI MATERIA AGGIUNTIVA ↓↓↓ -->
-    <!-- Cambia il numero (04, 05...), il titolo, il professore, i tag e le project card -->
-
-  </div><!-- /subjects -->
-
-</main><!-- /main -->
-
-
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║          FOOTER              ║ -->
-<!-- ╚══════════════════════════════╝ -->
-<footer>
+    </div></div></main><footer>
   <span class="footer-name">Laura Gavi</span>
   <span class="footer-copy"> AI and Innovation Management · [2026] &nbsp;·&nbsp; Portfolio </span>
 </footer>
